@@ -391,7 +391,17 @@
         "io.github.tjcgraham-rgb/gaip-outcome-value"
       ],
       "search": "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.tjcgraham-rgb/gaip"
-    }
+    },
+    "directories": [
+      {
+        "directory": "Glama",
+        "url": "https://glama.ai/mcp/connectors/io.github.tjcgraham-rgb/gaip-broker"
+      },
+      {
+        "directory": "Smithery",
+        "url": "https://smithery.ai/server/tjcgraham/gaip-agents"
+      }
+    ]
   },
   "example_calls": {
     "mcp_check": {
