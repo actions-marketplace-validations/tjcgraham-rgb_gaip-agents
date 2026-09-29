@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gaip-check"
+version = "0.1.0"
+description = "Check an AI agent before you call it: card, protocol, endpoint, fixes and a verifiable receipt (free, via GAIP)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "GAIP" }]
+keywords = ["a2a", "mcp", "agents", "agent-card", "verification", "interoperability"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://www.gaipagents.com"
+Index = "https://www.gaipagents.com/v1/free/agent-readiness"
+
+[project.scripts]
+gaip-check = "gaip_check:main"

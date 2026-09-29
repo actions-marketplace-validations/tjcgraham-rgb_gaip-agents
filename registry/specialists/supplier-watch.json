@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.tjcgraham-rgb/gaip-supplier-watch",
+  "title": "GAIP Supplier Watch Agent",
+  "description": "Supplier Reliability: compares supplier snapshots and watches interfaces for material change.",
+  "version": "1.1.0",
+  "websiteUrl": "https://www.gaipagents.com/agents/supplier-watch",
+  "icons": [
+    {
+      "src": "https://www.gaipagents.com/assets/agents/supplier-watch.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/tjcgraham-rgb/gaip-agents",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.gaipagents.com/mcp/agents/supplier-watch"
+    }
+  ]
+}

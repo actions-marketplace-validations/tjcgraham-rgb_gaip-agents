@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.tjcgraham-rgb/gaip-broker",
+  "title": "GAIP — evidence on AI agents before and after you call them",
+  "description": "Four tools to check, watch, diagnose and verify AI agents and MCP servers. Free, read-only.",
+  "version": "1.6.0",
+  "websiteUrl": "https://www.gaipagents.com",
+  "icons": [
+    {
+      "src": "https://www.gaipagents.com/erc8004/images/gaip.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/tjcgraham-rgb/gaip-agents",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.gaipagents.com/mcp"
+    }
+  ]
+}

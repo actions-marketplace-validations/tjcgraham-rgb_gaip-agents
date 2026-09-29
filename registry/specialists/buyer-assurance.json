@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.tjcgraham-rgb/gaip-buyer-assurance",
+  "title": "GAIP Buyer Assurance Agent",
+  "description": "Delivery Assurance: records a buyer's service request and checks what was delivered.",
+  "version": "1.1.0",
+  "websiteUrl": "https://www.gaipagents.com/agents/buyer-assurance",
+  "icons": [
+    {
+      "src": "https://www.gaipagents.com/assets/agents/buyer-assurance.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/tjcgraham-rgb/gaip-agents",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.gaipagents.com/mcp/agents/buyer-assurance"
+    }
+  ]
+}

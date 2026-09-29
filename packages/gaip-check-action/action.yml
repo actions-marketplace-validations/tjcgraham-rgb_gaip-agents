@@ -1,0 +1,46 @@
+name: "GAIP agent check"
+description: "Check an A2A agent card, MCP server or OpenAPI document with GAIP's free public readiness check and report its findings."
+author: "GAIP"
+branding:
+  icon: "check-circle"
+  color: "green"
+inputs:
+  agent-url:
+    description: "Public https:// URL of the agent: a domain, or the direct URL of its A2A card, MCP server card/server.json or OpenAPI document."
+    required: true
+  fail-on-error:
+    description: "Fail the step when GAIP reports ERROR findings or cannot reach the agent ('true' or 'false')."
+    required: false
+    default: "true"
+  gaip-endpoint:
+    description: "GAIP A2A endpoint that runs the check."
+    required: false
+    default: "https://www.gaipagents.com/a2a/agentverse"
+  timeout-seconds:
+    description: "Request timeout in seconds."
+    required: false
+    default: "60"
+outputs:
+  verdict:
+    description: "READY, FIXES_NEEDED, UNREACHABLE or NOT_CHECKED."
+    value: ${{ steps.gaip-check.outputs.verdict }}
+  receipt-id:
+    description: "GAIP receipt ID for this check (verify at /v1/free/receipts/<id>/verify)."
+    value: ${{ steps.gaip-check.outputs.receipt-id }}
+  error-count:
+    description: "Number of ERROR findings."
+    value: ${{ steps.gaip-check.outputs.error-count }}
+  warning-count:
+    description: "Number of WARNING findings."
+    value: ${{ steps.gaip-check.outputs.warning-count }}
+runs:
+  using: "composite"
+  steps:
+    - id: gaip-check
+      shell: bash
+      env:
+        GAIP_AGENT_URL: ${{ inputs.agent-url }}
+        GAIP_FAIL_ON_ERROR: ${{ inputs.fail-on-error }}
+        GAIP_ENDPOINT: ${{ inputs.gaip-endpoint }}
+        GAIP_TIMEOUT_SECONDS: ${{ inputs.timeout-seconds }}
+      run: python3 "${{ github.action_path }}/check.py"
