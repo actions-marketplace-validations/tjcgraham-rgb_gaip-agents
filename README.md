@@ -61,6 +61,19 @@ Add GAIP to an MCP client:
 { "mcpServers": { "gaip": { "type": "http", "url": "https://www.gaipagents.com/mcp" } } }
 ```
 
+## Use it in CI (GitHub Action)
+
+Check your agent card, MCP server or OpenAPI document on every push, free and with no key:
+
+```yaml
+- uses: tjcgraham-rgb/gaip-agents@v1
+  with:
+    agent-url: https://your-agent.example/.well-known/agent-card.json
+    fail-on-error: "true"
+```
+
+Outputs: `verdict` (READY, FIXES_NEEDED, UNREACHABLE or NOT_CHECKED), `receipt-id`, `error-count`, `warning-count`.
+
 ## In this repository
 
 | Path | What it is |
@@ -68,7 +81,7 @@ Add GAIP to an MCP client:
 | `registry/` | The Official MCP Registry records: `gaip-broker.json` and one record per specialist |
 | `listing-kit.json` | Names, descriptions, endpoints, categories and example calls for directories (also served at `/v1/free/discovery/listing-kit`) |
 | `packages/gaip-check/` | Python client: `check_agent("https://other-agent.example")` |
-| `packages/gaip-check-action/` | GitHub Action that checks an agent card in CI |
+| `action.yml`, `packages/gaip-check-action/` | GitHub Action that checks an agent card in CI (`uses: tjcgraham-rgb/gaip-agents@v1`) |
 | `assets/` | GAIP logo and the ten specialist icons (SVG) |
 
 ## What a result means
