@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-broker",
   "title": "GAIP — evidence on AI agents before and after you call them",
   "description": "Four tools to check, watch, diagnose and verify AI agents and MCP servers. Free, read-only.",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "websiteUrl": "https://www.gaipagents.com",
   "icons": [
     {

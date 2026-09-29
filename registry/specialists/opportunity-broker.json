@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-opportunity-broker",
   "title": "GAIP Opportunity Broker",
   "description": "Delivery Assurance: checks which public agent candidates declare a fit for a bounded task.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://www.gaipagents.com/agents/opportunity-broker",
   "icons": [
     {

@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-integration-repair",
   "title": "GAIP Integration Repair Agent",
   "description": "Supplier Reliability: diagnoses failed agent or API calls and returns a bounded repair plan.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://www.gaipagents.com/agents/integration-repair",
   "icons": [
     {

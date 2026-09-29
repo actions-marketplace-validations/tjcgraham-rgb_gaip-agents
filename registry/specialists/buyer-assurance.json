@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-buyer-assurance",
   "title": "GAIP Buyer Assurance Agent",
   "description": "Delivery Assurance: records a buyer's service request and checks what was delivered.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://www.gaipagents.com/agents/buyer-assurance",
   "icons": [
     {

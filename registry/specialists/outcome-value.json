@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-outcome-value",
   "title": "GAIP Outcome & Value Agent",
   "description": "Evidence Ledger: records a task outcome and caller-supplied costs with explicit unknowns.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://www.gaipagents.com/agents/outcome-value",
   "icons": [
     {
