@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.tjcgraham-rgb/gaip-integration-protocol",
   "title": "GAIP Integration & Protocol Agent",
-  "description": "Agent Observatory: checks A2A, MCP and OpenAPI declarations and logs published changes.",
-  "version": "1.2.0",
+  "description": "Developer checks and Agent Observatory: A2A, MCP and OpenAPI checks with a dated change log.",
+  "version": "1.3.0",
   "websiteUrl": "https://www.gaipagents.com/agents/integration-protocol",
   "icons": [
     {

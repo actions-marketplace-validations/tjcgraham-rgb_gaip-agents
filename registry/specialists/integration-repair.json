@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.tjcgraham-rgb/gaip-integration-repair",
   "title": "GAIP Integration Repair Agent",
-  "description": "Supplier Reliability: diagnoses failed agent or API calls and returns a bounded repair plan.",
-  "version": "1.2.0",
+  "description": "Now part of GAIP developer checks: diagnoses failed agent or API calls (gaip_diagnose).",
+  "version": "1.3.0",
   "websiteUrl": "https://www.gaipagents.com/agents/integration-repair",
   "icons": [
     {
