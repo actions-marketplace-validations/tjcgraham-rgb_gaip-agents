@@ -8,7 +8,7 @@ import uuid
 from typing import Any, Callable
 
 __all__ = ["check_agent", "watch_delivery", "main"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 ENDPOINT = "https://www.gaipagents.com/a2a/agentverse"
 
@@ -21,7 +21,7 @@ def _ask(text: str, *, endpoint: str = ENDPOINT, timeout: float = 30.0,
                                "parts": [{"kind": "text", "text": text}]}},
     }).encode()
     request = urllib.request.Request(endpoint, data=body, headers={
-        "Content-Type": "application/json", "User-Agent": f"gaip-check/{__version__}"})
+        "Content-Type": "application/json", "User-Agent": f"gaip-check-client/{__version__}"})
     with opener(request, timeout=timeout) as response:
         payload = json.loads(response.read().decode("utf-8"))
     if "error" in payload:

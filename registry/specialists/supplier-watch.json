@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-supplier-watch",
   "title": "GAIP Supplier Watch Agent",
   "description": "Supplier Reliability: compares supplier snapshots and watches interfaces for material change.",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "websiteUrl": "https://www.gaipagents.com/agents/supplier-watch",
   "icons": [
     {

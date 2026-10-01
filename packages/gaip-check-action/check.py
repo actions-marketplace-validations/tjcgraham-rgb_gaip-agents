@@ -23,7 +23,7 @@ import uuid
 from typing import Any, Callable
 
 DEFAULT_ENDPOINT = "https://www.gaipagents.com/a2a/agentverse"
-USER_AGENT = "gaip-check-action/1.0"
+USER_AGENT = "gaip-check-action-client/1.1"
 DISCLAIMER = ("GAIP reports what it observed at the time of this check, from public metadata only. "
               "It is not certification, endorsement, a security test or legal advice. "
               "Terms: https://www.gaipagents.com/terms")
