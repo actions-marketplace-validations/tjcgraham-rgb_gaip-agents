@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gaip-check"
-version = "0.1.0"
+version = "0.2.0"
 description = "Check an AI agent before you call it: card, protocol, endpoint, fixes and a verifiable receipt (free, via GAIP)."
 readme = "README.md"
 requires-python = ">=3.9"

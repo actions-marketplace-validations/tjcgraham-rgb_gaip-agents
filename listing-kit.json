@@ -1,15 +1,25 @@
 {
   "schema_version": "gaip.listing-kit.v1",
   "name": "GAIP",
-  "full_name": "GAIP — Governed Agentic Intelligence Platform",
+  "full_name": "GAIP",
   "website": "https://www.gaipagents.com",
   "logo": {
     "url": "https://www.gaipagents.com/erc8004/images/gaip.svg",
     "mimeType": "image/svg+xml"
   },
   "one_liner": "Free, read-only evidence on AI agents and MCP servers: conformance, change, delivery, receipts.",
-  "short_description": "GAIP checks the public declarations of AI agents and MCP servers, watches them for change, witnesses what a delegated call returned and keeps verifiable receipts. Free, read-only, no account.",
-  "long_description": "GAIP gives builders and their agents read-only evidence about other agents before and after a delegated call. It is organised as four products plus a provenance showcase over ten public specialist agents. Agent Observatory & Conformance checks A2A, MCP and OpenAPI declarations and handshakes and keeps a hash-chained log of published manifest changes. Supplier Reliability watches the suppliers you depend on for material change and diagnoses failed calls with a bounded repair plan. Delivery Assurance records the checks a buyer expects, witnesses what came back and checks that cited pages contain the quoted text. Evidence Ledger verifies retained receipts, compiles evidence packs and incident bundles, and exports receipts in other ecosystems' shapes. Every result states what was observed and when; it is not a certification, endorsement, ranking or universal score, and not legal, financial or insurance advice. Calls are free and need no account or key; public or non-personal data only.",
+  "lead": "Check any AI agent, MCP server or API by URL: does it work, is it valid, has it changed? Free, no key.",
+  "lead_then": "A call failed? Paste the error into gaip_diagnose for the cause, retry timing and the exact fix.",
+  "first_call": {
+    "tool": "gaip_check",
+    "arguments": {
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "mcp": "https://www.gaipagents.com/mcp"
+  },
+  "quickstart": "https://www.gaipagents.com/docs/quickstart",
+  "short_description": "gaip_check tests whether an AI agent, MCP server or API works, is valid or has changed; paste a failing agent, MCP or API error into gaip_diagnose for the cause, retry timing and the exact fix. GAIP also watches agents for change, witnesses what a delegated call returned and keeps verifiable receipts. Free, read-only, no account.",
+  "long_description": "GAIP gives builders and their agents read-only evidence about other agents before and after a delegated call. It has three public faces. The front door for developers is four tools on /mcp: gaip_check (does an agent, MCP server or API work, is it valid, has it changed), gaip_diagnose (why a call failed and the fix), gaip_watch and gaip_verify; behind it, the Agent Observatory keeps a hash-chained log of what agents and MCP servers published, and the integration-protocol agent checks A2A, MCP and OpenAPI declarations and watches suppliers for change. Witness records agreed terms, witnesses what was delivered, tests supplier claims, checks that cited pages contain the quoted text, and keeps verifiable receipts, dispute bundles, evidence packs and outcome records. The Listing Observer (preview) reads a shop product page into one clean product record for AI shopping agents, says whether the page and the shop platform's data agree, and keeps a dated price and stock history. Every result states what was observed and when; it is not a certification, endorsement, ranking or universal score, and not legal, financial or insurance advice. Calls are free and need no account or key; public or non-personal data only.",
   "categories": [
     "developer-tools",
     "agent-infrastructure",
@@ -45,7 +55,7 @@
     {
       "name": "gaip_check",
       "title": "Check an AI agent, MCP server or API",
-      "use_when": "Use this when asked whether an AI agent, MCP server or API works, is reachable, is valid or has changed. Pass its `url`. Returns a one-line verdict (READY, FIXES_NEEDED, NO_AGENT_CARD or UNREACHABLE), fixes, dated history when GAIP observes it, and a receipt.",
+      "use_when": "Use this when asked whether an AI agent, MCP server or API works, is valid or has changed. Pass its `url` (agent card, MCP endpoint or OpenAPI document). Returns a one-line verdict, the fixes, dated history when GAIP observes it, and a receipt.",
       "example_arguments": {
         "url": "https://www.gaipagents.com/.well-known/agent-card.json"
       },
@@ -73,7 +83,7 @@
     {
       "name": "gaip_diagnose",
       "title": "Why did my agent or API call fail?",
-      "use_when": "Use this when an agent, MCP or API call failed and you are asked why or how to fix it. Pass the `error` text and/or `http_status`; add the service `url` to see changes GAIP observed around then. Returns the likely cause, when to retry, fix steps and a receipt.",
+      "use_when": "Use this when an agent, MCP or API call failed. Paste the `error` text and/or `http_status`; add the service `url` if known. Returns the cause, the exact fix (e.g. the missing argument), retry_after_seconds and a receipt.",
       "example_arguments": {
         "error": "HTTP 429 Too Many Requests; Retry-After: 20",
         "http_status": 429
@@ -87,8 +97,8 @@
     },
     {
       "name": "gaip_verify",
-      "title": "Verify claims, citations or a delivery",
-      "use_when": "Use this when asked whether something delivered what was promised, whether claims are true, or whether citations are accurate. Pass `citations`, or `claims` (+ `url`), or a service `url` plus the `result` you got. Returns which check ran and each result.",
+      "title": "Verify a delivery or citations",
+      "use_when": "Use this when asked whether a service delivered what was promised or whether cited pages contain the quoted text. Pass `citations`, or a service `url` (+ `checks`, the `result` you got); `claims` are compared with `observations` you supply.",
       "example_arguments": {
         "citations": [
           {
@@ -107,104 +117,45 @@
   ],
   "products": [
     {
-      "id": "agent-observatory",
-      "name": "Agent Observatory & Conformance",
+      "id": "developer-checks",
+      "name": "Developer checks & Observatory",
       "kind": "PRODUCT",
-      "one_line": "Checks public A2A, MCP and OpenAPI declarations and handshakes, and records what was observed at a stated time; facts at time T, never a ranking or universal score.",
+      "one_line": "The front door for developers: on /mcp, gaip_check tests whether an agent, MCP server or API works, is valid or has changed, gaip_diagnose explains a failed call and the fix, gaip_watch follows it for changes and gaip_verify checks what came back. Behind it, the Agent Observatory keeps a dated record of what agents published; facts at a stated time, never a ranking or score.",
       "lead_agent": "integration-protocol",
       "agents": [
         "integration-protocol"
       ],
-      "url": "https://www.gaipagents.com/v1/free/products#agent-observatory"
+      "url": "https://www.gaipagents.com/v1/free/products#developer-checks"
     },
     {
-      "id": "supplier-reliability",
-      "name": "Supplier Reliability",
+      "id": "witness",
+      "name": "Witness: delivery & evidence",
       "kind": "PRODUCT",
-      "one_line": "Detects material change in the public interfaces of suppliers you depend on and diagnoses failed calls with a bounded repair plan; the wasted-cost figure from outcome evidence surfaces here.",
-      "lead_agent": "supplier-watch",
-      "agents": [
-        "supplier-watch",
-        "integration-repair"
-      ],
-      "url": "https://www.gaipagents.com/v1/free/products#supplier-reliability"
-    },
-    {
-      "id": "delivery-assurance",
-      "name": "Delivery Assurance",
-      "kind": "PRODUCT",
-      "one_line": "Before delegation, check which candidates declare a fit; record the delivery checks the buyer expects; witness what came back and return a verifiable receipt.",
+      "one_line": "Agreed terms, delivery, receipts, disputes and evidence: record the checks a buyer expects, witness what came back, test supplier claims, and keep verifiable receipts, evidence packs and outcome records; no trust score and no ROI claim.",
       "lead_agent": "witness",
       "agents": [
-        "witness",
-        "buyer-assurance",
-        "procurement-verify",
-        "opportunity-broker"
+        "witness"
       ],
-      "url": "https://www.gaipagents.com/v1/free/products#delivery-assurance"
+      "url": "https://www.gaipagents.com/v1/free/products#witness"
     },
     {
-      "id": "evidence-ledger",
-      "name": "Evidence Ledger",
+      "id": "shop-listing-data",
+      "name": "Shop listing data (preview)",
       "kind": "PRODUCT",
-      "one_line": "Retained, verifiable GAIP receipts and task-specific counterparty evidence, plus independent outcome evidence for outcome-priced contracts; no trust score and no ROI claim.",
-      "lead_agent": "trust-assurance",
+      "one_line": "Whether a shop's product data reads the same to AI shopping agents as on the page: price, stock, SKU and name across the page's public sources, with a dated history. The engine of GAIP's Shopify app (coming soon). Read-only; never cart or checkout.",
+      "lead_agent": "listing-observer",
       "agents": [
-        "trust-assurance",
-        "outcome-value"
+        "listing-observer"
       ],
-      "url": "https://www.gaipagents.com/v1/free/products#evidence-ledger"
-    },
-    {
-      "id": "provenance-showcase",
-      "name": "Provenance showcase",
-      "kind": "SHOWCASE",
-      "one_line": "Brand and method showcase: field-by-field provenance evidence for a few key collections GAIP holds rights-clear on-chain history for (currently Autoglyphs; others only once rights-clear).",
-      "lead_agent": "art-intelligence",
-      "agents": [
-        "art-intelligence"
-      ],
-      "url": "https://www.gaipagents.com/v1/free/products#provenance-showcase"
+      "url": "https://www.gaipagents.com/v1/free/products#shop-listing-data"
     }
   ],
   "agents": [
     {
-      "id": "art-intelligence",
-      "name": "GAIP Digital Art Intelligence Agent",
-      "one_liner": "Provenance showcase: compares public evidence for rights-clear art collections, flags conflicts.",
-      "product": "provenance-showcase",
-      "web": "https://www.gaipagents.com/agents/art-intelligence",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/art-intelligence/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/art-intelligence",
-      "mcp": "https://www.gaipagents.com/mcp/agents/art-intelligence",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/art-intelligence/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-art-intelligence",
-      "icon": "https://www.gaipagents.com/assets/agents/art-intelligence.svg",
-      "tools": [
-        "evaluate_public_art_evidence"
-      ]
-    },
-    {
-      "id": "opportunity-broker",
-      "name": "GAIP Opportunity Broker",
-      "one_liner": "Delivery Assurance: checks which public agent candidates declare a fit for a bounded task.",
-      "product": "delivery-assurance",
-      "web": "https://www.gaipagents.com/agents/opportunity-broker",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/opportunity-broker/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/opportunity-broker",
-      "mcp": "https://www.gaipagents.com/mcp/agents/opportunity-broker",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/opportunity-broker/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-opportunity-broker",
-      "icon": "https://www.gaipagents.com/assets/agents/opportunity-broker.svg",
-      "tools": [
-        "preflight_broker_candidates"
-      ]
-    },
-    {
       "id": "integration-protocol",
       "name": "GAIP Integration & Protocol Agent",
-      "one_liner": "Agent Observatory: checks A2A, MCP and OpenAPI declarations and logs published changes.",
-      "product": "agent-observatory",
+      "one_liner": "Behind /mcp: checks A2A, MCP and OpenAPI, keeps the Agent Observatory, diagnoses failed calls.",
+      "product": "developer-checks",
       "web": "https://www.gaipagents.com/agents/integration-protocol",
       "a2a_agent_card": "https://www.gaipagents.com/agents/integration-protocol/.well-known/agent-card.json",
       "a2a": "https://www.gaipagents.com/a2a/integration-protocol",
@@ -219,34 +170,19 @@
         "gaip_watch_remove",
         "gaip_watch_events",
         "gaip_observatory_lookup",
-        "gaip_manifest_changes"
-      ]
-    },
-    {
-      "id": "trust-assurance",
-      "name": "GAIP Trust & Assurance Agent",
-      "one_liner": "Evidence Ledger: verifies GAIP receipts and compiles evidence packs and incident bundles.",
-      "product": "evidence-ledger",
-      "web": "https://www.gaipagents.com/agents/trust-assurance",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/trust-assurance/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/trust-assurance",
-      "mcp": "https://www.gaipagents.com/mcp/agents/trust-assurance",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/trust-assurance/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-trust-assurance",
-      "icon": "https://www.gaipagents.com/assets/agents/trust-assurance.svg",
-      "tools": [
-        "inspect_counterparty_evidence",
-        "gaip_receipt_export",
-        "verify_gaip_receipt",
-        "gaip_evidence_pack",
-        "gaip_incident_bundle"
+        "gaip_manifest_changes",
+        "gaip_observatory_capture",
+        "gaip_tools_changed_since",
+        "gaip_compare_supplier_snapshots",
+        "gaip_diagnose_integration_failure",
+        "gaip_supplier_reliability"
       ]
     },
     {
       "id": "witness",
       "name": "GAIP Witness Agent",
-      "one_liner": "Delivery Assurance: records delivery checks, witnesses results and checks cited quotes.",
-      "product": "delivery-assurance",
+      "one_liner": "Agreed terms, delivery, receipts, disputes and evidence: what a service delivered, checkable later.",
+      "product": "witness",
       "web": "https://www.gaipagents.com/agents/witness",
       "a2a_agent_card": "https://www.gaipagents.com/agents/witness/.well-known/agent-card.json",
       "a2a": "https://www.gaipagents.com/a2a/witness-agent",
@@ -264,96 +200,83 @@
         "gaip_watch_list",
         "gaip_watch_remove",
         "gaip_watch_events",
-        "gaip_citation_witness"
+        "gaip_citation_witness",
+        "gaip_check_sar_receipt",
+        "assurance_prepare",
+        "assurance_complete",
+        "assurance_verify",
+        "gaip_verify_supplier_claims",
+        "inspect_counterparty_evidence",
+        "gaip_evidence_pack",
+        "gaip_incident_bundle",
+        "gaip_measure_outcome_value"
       ]
+    },
+    {
+      "id": "listing-observer",
+      "name": "GAIP Listing Observer",
+      "one_liner": "Shop listing data (preview): a product page as clean data, with source checks and price history.",
+      "product": "shop-listing-data",
+      "web": "https://www.gaipagents.com/agents/listing-observer",
+      "a2a_agent_card": "https://www.gaipagents.com/agents/listing-observer/.well-known/agent-card.json",
+      "a2a": "https://www.gaipagents.com/a2a/listing-observer",
+      "mcp": "https://www.gaipagents.com/mcp/agents/listing-observer",
+      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/listing-observer/server-card",
+      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-listing-observer",
+      "icon": "https://www.gaipagents.com/assets/agents/listing-observer.svg",
+      "tools": [
+        "gaip_observe_listing"
+      ]
+    }
+  ],
+  "folded_agents": [
+    {
+      "id": "art-intelligence",
+      "now_part_of": "unlisted",
+      "mcp": "https://www.gaipagents.com/mcp/agents/art-intelligence",
+      "a2a": "https://www.gaipagents.com/a2a/art-intelligence"
+    },
+    {
+      "id": "opportunity-broker",
+      "now_part_of": "unlisted",
+      "mcp": "https://www.gaipagents.com/mcp/agents/opportunity-broker",
+      "a2a": "https://www.gaipagents.com/a2a/opportunity-broker"
+    },
+    {
+      "id": "trust-assurance",
+      "now_part_of": "witness",
+      "mcp": "https://www.gaipagents.com/mcp/agents/trust-assurance",
+      "a2a": "https://www.gaipagents.com/a2a/trust-assurance"
     },
     {
       "id": "buyer-assurance",
-      "name": "GAIP Buyer Assurance Agent",
-      "one_liner": "Delivery Assurance: records a buyer's service request and checks what was delivered.",
-      "product": "delivery-assurance",
-      "web": "https://www.gaipagents.com/agents/buyer-assurance",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/buyer-assurance/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/buyer-assurance",
+      "now_part_of": "witness",
       "mcp": "https://www.gaipagents.com/mcp/agents/buyer-assurance",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/buyer-assurance/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-buyer-assurance",
-      "icon": "https://www.gaipagents.com/assets/agents/buyer-assurance.svg",
-      "tools": [
-        "assurance_prepare",
-        "assurance_complete",
-        "assurance_verify"
-      ]
+      "a2a": "https://www.gaipagents.com/a2a/buyer-assurance"
     },
     {
       "id": "procurement-verify",
-      "name": "GAIP Procurement Evidence Agent",
-      "one_liner": "Delivery Assurance: compares supplier claims with public observations, keeping unknowns.",
-      "product": "delivery-assurance",
-      "web": "https://www.gaipagents.com/agents/procurement-verify",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/procurement-verify/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/procurement-verify",
+      "now_part_of": "witness",
       "mcp": "https://www.gaipagents.com/mcp/agents/procurement-verify",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/procurement-verify/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-procurement-verify",
-      "icon": "https://www.gaipagents.com/assets/agents/procurement-verify.svg",
-      "tools": [
-        "gaip_verify_supplier_claims"
-      ]
+      "a2a": "https://www.gaipagents.com/a2a/procurement-verify"
     },
     {
       "id": "integration-repair",
-      "name": "GAIP Integration Repair Agent",
-      "one_liner": "Supplier Reliability: diagnoses failed agent or API calls and returns a bounded repair plan.",
-      "product": "supplier-reliability",
-      "web": "https://www.gaipagents.com/agents/integration-repair",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/integration-repair/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/integration-repair",
+      "now_part_of": "integration-protocol",
       "mcp": "https://www.gaipagents.com/mcp/agents/integration-repair",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/integration-repair/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-integration-repair",
-      "icon": "https://www.gaipagents.com/assets/agents/integration-repair.svg",
-      "tools": [
-        "gaip_diagnose_integration_failure",
-        "gaip_supplier_reliability"
-      ]
+      "a2a": "https://www.gaipagents.com/a2a/integration-repair"
     },
     {
       "id": "supplier-watch",
-      "name": "GAIP Supplier Watch Agent",
-      "one_liner": "Supplier Reliability: compares supplier snapshots and watches interfaces for material change.",
-      "product": "supplier-reliability",
-      "web": "https://www.gaipagents.com/agents/supplier-watch",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/supplier-watch/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/supplier-watch",
+      "now_part_of": "integration-protocol",
       "mcp": "https://www.gaipagents.com/mcp/agents/supplier-watch",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/supplier-watch/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-supplier-watch",
-      "icon": "https://www.gaipagents.com/assets/agents/supplier-watch.svg",
-      "tools": [
-        "gaip_compare_supplier_snapshots",
-        "gaip_watch_register",
-        "gaip_watch_list",
-        "gaip_watch_remove",
-        "gaip_watch_events",
-        "gaip_supplier_reliability"
-      ]
+      "a2a": "https://www.gaipagents.com/a2a/supplier-watch"
     },
     {
       "id": "outcome-value",
-      "name": "GAIP Outcome & Value Agent",
-      "one_liner": "Evidence Ledger: records a task outcome and caller-supplied costs with explicit unknowns.",
-      "product": "evidence-ledger",
-      "web": "https://www.gaipagents.com/agents/outcome-value",
-      "a2a_agent_card": "https://www.gaipagents.com/agents/outcome-value/.well-known/agent-card.json",
-      "a2a": "https://www.gaipagents.com/a2a/outcome-value",
+      "now_part_of": "witness",
       "mcp": "https://www.gaipagents.com/mcp/agents/outcome-value",
-      "mcp_server_card": "https://www.gaipagents.com/mcp/agents/outcome-value/server-card",
-      "mcp_registry_name": "io.github.tjcgraham-rgb/gaip-outcome-value",
-      "icon": "https://www.gaipagents.com/assets/agents/outcome-value.svg",
-      "tools": [
-        "gaip_measure_outcome_value"
-      ]
+      "a2a": "https://www.gaipagents.com/a2a/outcome-value"
     }
   ],
   "endpoints": {
@@ -379,11 +302,14 @@
     "official_mcp_registry": {
       "platform": "io.github.tjcgraham-rgb/gaip-broker",
       "specialists": [
+        "io.github.tjcgraham-rgb/gaip-integration-protocol",
+        "io.github.tjcgraham-rgb/gaip-witness",
+        "io.github.tjcgraham-rgb/gaip-listing-observer"
+      ],
+      "folded_specialists": [
         "io.github.tjcgraham-rgb/gaip-art-intelligence",
         "io.github.tjcgraham-rgb/gaip-opportunity-broker",
-        "io.github.tjcgraham-rgb/gaip-integration-protocol",
         "io.github.tjcgraham-rgb/gaip-trust-assurance",
-        "io.github.tjcgraham-rgb/gaip-witness",
         "io.github.tjcgraham-rgb/gaip-buyer-assurance",
         "io.github.tjcgraham-rgb/gaip-procurement-verify",
         "io.github.tjcgraham-rgb/gaip-integration-repair",
@@ -413,20 +339,22 @@
         "params": {
           "name": "gaip_check",
           "arguments": {
-            "url": "https://agent.example/.well-known/agent-card.json"
+            "url": "https://mcp.deepwiki.com/mcp"
           }
         }
       }
     },
-    "mcp_quickstart": {
+    "mcp_diagnose": {
       "url": "https://www.gaipagents.com/mcp",
       "body": {
         "jsonrpc": "2.0",
-        "id": 1,
+        "id": 2,
         "method": "tools/call",
         "params": {
-          "name": "gaip_quickstart",
-          "arguments": {}
+          "name": "gaip_diagnose",
+          "arguments": {
+            "error": "MCP error -32602: Invalid arguments for tool search: missing required argument query"
+          }
         }
       }
     },
@@ -444,14 +372,14 @@
             "parts": [
               {
                 "kind": "text",
-                "text": "check https://agent.example/.well-known/agent-card.json"
+                "text": "check https://mcp.deepwiki.com/mcp"
               }
             ]
           }
         }
       }
     },
-    "observatory_lookup": "https://www.gaipagents.com/v1/free/observatory/lookup?url=https://agent.example/.well-known/agent-card.json"
+    "observatory_lookup": "https://www.gaipagents.com/v1/free/observatory/lookup?url=https://mcp.deepwiki.com/mcp"
   },
   "client_config": {
     "schema_version": "gaip.client-config.v1",
@@ -475,7 +403,7 @@
         }
       },
       "claude_desktop": {
-        "how": "Settings > Connectors > Add custom connector, then enter the MCP URL.",
+        "how": "Customize > Connectors > Add custom connector (older versions: Settings > Connectors), enter the MCP URL and choose no sign-in.",
         "url": "https://www.gaipagents.com/mcp"
       },
       "cursor": {
@@ -498,15 +426,27 @@
             }
           }
         }
+      },
+      "chatgpt": {
+        "how": "Settings > Security and login > turn on Developer mode; then add a plugin with the plus button and, under Connection, enter the MCP URL (including /mcp).",
+        "url": "https://www.gaipagents.com/mcp"
+      },
+      "openai_agents_sdk": {
+        "python": "import asyncio\nfrom agents import Agent, Runner\nfrom agents.mcp import MCPServerStreamableHttp\n\n\nasync def main():\n    async with MCPServerStreamableHttp(name='gaip', params={\"url\": 'https://www.gaipagents.com/mcp'}) as server:\n        agent = Agent(name=\"Assistant\", instructions=\"Use the GAIP tools to check agents.\",\n                      mcp_servers=[server])\n        result = await Runner.run(agent, \"Check https://mcp.deepwiki.com/mcp with gaip_check.\")\n        print(result.final_output)\n\n\nasyncio.run(main())\n"
+      },
+      "langchain": {
+        "install": "pip install langchain-mcp-adapters",
+        "python": "import asyncio\nfrom langchain_mcp_adapters.client import MultiServerMCPClient\n\n\nasync def main():\n    client = MultiServerMCPClient({'gaip': {\"transport\": \"http\", \"url\": 'https://www.gaipagents.com/mcp'}})\n    tools = await client.get_tools()\n    print([tool.name for tool in tools])\n\n\nasyncio.run(main())\n"
       }
     },
     "curl": {
       "mcp_tools_list": "curl -s https://www.gaipagents.com/mcp -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{}}'",
-      "mcp_first_call": "curl -s https://www.gaipagents.com/mcp -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/call\",\"params\":{\"name\":\"gaip_quickstart\",\"arguments\":{}}}'",
-      "rest_first_call": "curl -s 'https://www.gaipagents.com/v1/free/observatory/lookup?url=https://agent.example/.well-known/agent-card.json'",
-      "a2a_message_send": "curl -s https://www.gaipagents.com/a2a/agentverse -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"message/send\",\"params\":{\"message\":{\"kind\":\"message\",\"role\":\"user\",\"messageId\":\"m1\",\"parts\":[{\"kind\":\"text\",\"text\":\"check https://agent.example/.well-known/agent-card.json\"}]}}}'"
+      "mcp_first_call": "curl -s https://www.gaipagents.com/mcp -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/call\",\"params\":{\"name\":\"gaip_check\",\"arguments\":{\"url\":\"https://mcp.deepwiki.com/mcp\"}}}'",
+      "rest_first_call": "curl -s 'https://www.gaipagents.com/v1/free/observatory/lookup?url=https://mcp.deepwiki.com/mcp'",
+      "a2a_message_send": "curl -s https://www.gaipagents.com/a2a/agentverse -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"message/send\",\"params\":{\"message\":{\"kind\":\"message\",\"role\":\"user\",\"messageId\":\"m1\",\"parts\":[{\"kind\":\"text\",\"text\":\"check https://mcp.deepwiki.com/mcp\"}]}}}'"
     },
-    "notes": "Free, read-only, no account or key. Replace agent.example with the agent you want to check."
+    "notes": "Free, read-only, no account or key. The first call runs as-is against a public MCP server; then put the URL of the agent you want to check in \"url\".",
+    "quickstart": "https://www.gaipagents.com/docs/quickstart"
   },
   "legal": {
     "termsOfService": "https://www.gaipagents.com/terms",

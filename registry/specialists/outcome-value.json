@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.tjcgraham-rgb/gaip-outcome-value",
   "title": "GAIP Outcome & Value Agent",
-  "description": "Evidence Ledger: records a task outcome and caller-supplied costs with explicit unknowns.",
-  "version": "1.1.1",
+  "description": "Now part of GAIP Witness: records a task outcome and caller-supplied costs.",
+  "version": "1.3.0",
   "websiteUrl": "https://www.gaipagents.com/agents/outcome-value",
   "icons": [
     {

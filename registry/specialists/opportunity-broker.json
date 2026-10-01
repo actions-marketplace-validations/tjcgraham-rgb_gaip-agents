@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.tjcgraham-rgb/gaip-opportunity-broker",
   "title": "GAIP Opportunity Broker",
-  "description": "Delivery Assurance: checks which public agent candidates declare a fit for a bounded task.",
-  "version": "1.1.1",
+  "description": "No longer listed separately (still callable): which public agents declare a fit for a task.",
+  "version": "1.3.0",
   "websiteUrl": "https://www.gaipagents.com/agents/opportunity-broker",
   "icons": [
     {

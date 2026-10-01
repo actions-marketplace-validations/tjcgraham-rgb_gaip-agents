@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.tjcgraham-rgb/gaip-listing-observer",
+  "title": "GAIP Listing Observer",
+  "description": "Listing Observer preview: a shop product page as clean data, with source checks and price history.",
+  "version": "1.3.0",
+  "websiteUrl": "https://www.gaipagents.com/agents/listing-observer",
+  "icons": [
+    {
+      "src": "https://www.gaipagents.com/assets/agents/listing-observer.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/tjcgraham-rgb/gaip-agents",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.gaipagents.com/mcp/agents/listing-observer"
+    }
+  ]
+}

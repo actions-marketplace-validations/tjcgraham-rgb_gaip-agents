@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.tjcgraham-rgb/gaip-procurement-verify",
   "title": "GAIP Procurement Evidence Agent",
-  "description": "Delivery Assurance: compares supplier claims with public observations, keeping unknowns.",
-  "version": "1.1.1",
+  "description": "Now part of GAIP Witness: tests supplier claims and compares them with published metadata.",
+  "version": "1.3.0",
   "websiteUrl": "https://www.gaipagents.com/agents/procurement-verify",
   "icons": [
     {
