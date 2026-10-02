@@ -1,0 +1,1101 @@
+{
+ "schema": "aipref-signals.test-vectors.v1",
+ "parser_version": "0.1.0",
+ "follows": {
+  "aipref_vocab": "draft-ietf-aipref-vocab-08 (14 Sep 2026)",
+  "aipref_attach": "draft-ietf-aipref-attach-05 (19 Aug 2026)",
+  "rsl": "RSL 1.0 (RSL-SPEC-1.0, 10 Dec 2025)",
+  "tdmrep": "W3C TDM Reservation Protocol, Final Community Group Report",
+  "content_signals": "Content Signals Policy (contentsignals.org)"
+ },
+ "bytes_arguments": {
+  "tdmrep_facts": [
+   1
+  ],
+  "rsl_from_html": [
+   0
+  ]
+ },
+ "how_to_use": "Call function(*args) and compare with expected after a JSON round trip (tuples become lists). Arguments listed in bytes_arguments are UTF-8 encoded first.",
+ "cases": [
+  {
+   "function": "usage_preferences",
+   "name": "single label",
+   "args": [
+    "train-ai=n"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "two labels with space",
+   "args": [
+    "train-ai=y, search=n"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "y",
+     "search": "n"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "no spaces",
+   "args": [
+    "train-ai=n,search=y"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n",
+     "search": "y"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "all three labels",
+   "args": [
+    "ai-use=n, search=y, train-ai=y"
+   ],
+   "expected": {
+    "prefs": {
+     "ai-use": "n",
+     "search": "y",
+     "train-ai": "y"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "surrounding whitespace",
+   "args": [
+    "  train-ai=n  "
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "tab after comma",
+   "args": [
+    "train-ai=n,\tsearch=y"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n",
+     "search": "y"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "empty value: valid dictionary, no preferences",
+   "args": [
+    ""
+   ],
+   "expected": {
+    "prefs": {},
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "uppercase key: dictionary fails, preferences unknown",
+   "args": [
+    "Train-AI=n"
+   ],
+   "note": "vocab-08 section 6: keys with uppercase characters make the preferences unknown",
+   "expected": null
+  },
+  {
+   "function": "usage_preferences",
+   "name": "uppercase value: valid token but not y/n, ignored",
+   "args": [
+    "train-ai=N"
+   ],
+   "note": "tokens are case sensitive",
+   "expected": {
+    "prefs": {},
+    "ignored": [
+     "train-ai"
+    ]
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "unknown label ignored",
+   "args": [
+    "train-ai=n, foo=y"
+   ],
+   "note": "vocab-08: unknown labels MUST be ignored",
+   "expected": {
+    "prefs": {
+     "train-ai": "n"
+    },
+    "ignored": [
+     "foo"
+    ]
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "older draft label train-genai is unknown in vocab-08",
+   "args": [
+    "train-genai=n"
+   ],
+   "expected": {
+    "prefs": {},
+    "ignored": [
+     "train-genai"
+    ]
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "duplicate key: last wins",
+   "args": [
+    "train-ai=n, train-ai=y"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "y"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "parameters ignored",
+   "args": [
+    "train-ai=n;src=x"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n"
+    },
+    "ignored": []
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "bare key is boolean true, not y/n",
+   "args": [
+    "train-ai"
+   ],
+   "expected": {
+    "prefs": {},
+    "ignored": [
+     "train-ai"
+    ]
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "string value is not a token",
+   "args": [
+    "train-ai=\"n\""
+   ],
+   "expected": {
+    "prefs": {},
+    "ignored": [
+     "train-ai"
+    ]
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "boolean value",
+   "args": [
+    "train-ai=?0"
+   ],
+   "expected": {
+    "prefs": {},
+    "ignored": [
+     "train-ai"
+    ]
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "inner list value",
+   "args": [
+    "train-ai=(n y)"
+   ],
+   "expected": {
+    "prefs": {},
+    "ignored": [
+     "train-ai"
+    ]
+   }
+  },
+  {
+   "function": "usage_preferences",
+   "name": "trailing comma: malformed",
+   "args": [
+    "train-ai=n,"
+   ],
+   "expected": null
+  },
+  {
+   "function": "usage_preferences",
+   "name": "missing comma: malformed",
+   "args": [
+    "train-ai=n search=y"
+   ],
+   "expected": null
+  },
+  {
+   "function": "usage_preferences",
+   "name": "spaces around '=': malformed",
+   "args": [
+    "train-ai = n"
+   ],
+   "expected": null
+  },
+  {
+   "function": "usage_preferences",
+   "name": "comment is not allowed in a header value",
+   "args": [
+    "train-ai=n # no"
+   ],
+   "expected": null
+  },
+  {
+   "function": "usage_preferences",
+   "name": "yes/no words are not the vocabulary's tokens",
+   "args": [
+    "train-ai=no, search=yes"
+   ],
+   "expected": {
+    "prefs": {},
+    "ignored": [
+     "train-ai",
+     "search"
+    ]
+   }
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "one rule in the * group",
+   "args": [
+    "User-Agent: *\nContent-Usage: train-ai=n\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "path then preference",
+   "args": [
+    "User-agent: *\nContent-Usage: /blog/ train-ai=y\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": "/blog/",
+     "prefs": {
+      "train-ai": "y"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "path separated by a tab",
+   "args": [
+    "User-agent: *\nContent-Usage: /a\ttrain-ai=n\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": "/a",
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "rule name case-insensitive",
+   "args": [
+    "user-agent: *\ncontent-usage: train-ai=n\nCONTENT-USAGE: search=y\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    },
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "search": "y"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "comment removed",
+   "args": [
+    "User-agent: *\nContent-Usage: train-ai=n # no training, thanks\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "several groups and lines",
+   "args": [
+    "User-agent: GPTBot\nUser-agent: CCBot\nContent-Usage: train-ai=n\nDisallow: /x\n\nUser-agent: *\nAllow: /\nContent-Usage: search=y\nContent-Usage: /news/ ai-use=n\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "GPTBot",
+      "CCBot"
+     ],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    },
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "search": "y"
+     },
+     "ignored": []
+    },
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": "/news/",
+     "prefs": {
+      "ai-use": "n"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "before any group",
+   "args": [
+    "Content-Usage: train-ai=n\nUser-agent: *\nAllow: /\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "malformed preference kept as unknown",
+   "args": [
+    "User-agent: *\nContent-Usage: Train-AI=n\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": null,
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "path without a preference",
+   "args": [
+    "User-agent: *\nContent-Usage: /private/\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": "/private/",
+     "prefs": null,
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "empty value",
+   "args": [
+    "User-agent: *\nContent-Usage:\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": null,
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "CRLF line endings",
+   "args": [
+    "User-agent: *\r\nContent-Usage: train-ai=n\r\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "unknown label ignored",
+   "args": [
+    "User-agent: *\nContent-Usage: train-ai=n, bots=n\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": [
+      "bots"
+     ]
+    }
+   ]
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "no rule",
+   "args": [
+    "User-agent: *\nDisallow: /admin\n"
+   ],
+   "expected": []
+  },
+  {
+   "function": "robots_content_usage",
+   "name": "non-rule lines skipped",
+   "args": [
+    "garbage line\nUser-agent: *\n\n   \nContent-Usage: train-ai=n\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "path": null,
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    }
+   ]
+  },
+  {
+   "function": "robots_content_signals",
+   "name": "policy line",
+   "args": [
+    "User-Agent: *\nContent-Signal: search=yes,ai-train=no\nAllow: /\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "signals": {
+      "search": "yes",
+      "ai-train": "no"
+     }
+    }
+   ]
+  },
+  {
+   "function": "robots_content_signals",
+   "name": "case-insensitive names and values",
+   "args": [
+    "user-agent: *\ncontent-signal: Search=Yes, AI-Train=NO\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "signals": {
+      "search": "yes",
+      "ai-train": "no"
+     }
+    }
+   ]
+  },
+  {
+   "function": "robots_content_signals",
+   "name": "unknown keys and values dropped",
+   "args": [
+    "User-agent: *\nContent-Signal: search=maybe, foo=no, ai-input=no\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "signals": {
+      "ai-input": "no"
+     }
+    }
+   ]
+  },
+  {
+   "function": "robots_content_signals",
+   "name": "comment",
+   "args": [
+    "User-agent: *\nContent-Signal: ai-train=no # see policy\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "signals": {
+      "ai-train": "no"
+     }
+    }
+   ]
+  },
+  {
+   "function": "robots_content_signals",
+   "name": "nothing usable",
+   "args": [
+    "User-agent: *\nContent-Signal: garbage\n"
+   ],
+   "expected": [
+    {
+     "user_agents": [
+      "*"
+     ],
+     "signals": {}
+    }
+   ]
+  },
+  {
+   "function": "rsl_from_robots",
+   "name": "absolute https",
+   "args": [
+    "License: https://example.com/license.xml\n",
+    "example.com"
+   ],
+   "expected": [
+    "https://example.com/license.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_robots",
+   "name": "relative resolved against the host",
+   "args": [
+    "license: /rsl.xml\n",
+    "example.com"
+   ],
+   "expected": [
+    "https://example.com/rsl.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_robots",
+   "name": "http rejected",
+   "args": [
+    "License: http://example.com/l.xml\n",
+    "example.com"
+   ],
+   "expected": []
+  },
+  {
+   "function": "rsl_from_robots",
+   "name": "userinfo rejected",
+   "args": [
+    "License: https://user@example.com/l.xml\n",
+    "example.com"
+   ],
+   "expected": []
+  },
+  {
+   "function": "rsl_from_robots",
+   "name": "comment and duplicates",
+   "args": [
+    "LICENSE: https://a.example/l.xml # rsl\nLicense: https://a.example/l.xml\n",
+    "example.com"
+   ],
+   "expected": [
+    "https://a.example/l.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_robots",
+   "name": "inside a group too",
+   "args": [
+    "User-agent: *\nAllow: /\nLicense: https://example.com/license.xml\n",
+    "example.com"
+   ],
+   "expected": [
+    "https://example.com/license.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_link_header",
+   "name": "quoted rel and type",
+   "args": [
+    "<https://example.com/license.xml>; rel=\"license\"; type=\"application/rsl+xml\"",
+    "https://example.com/"
+   ],
+   "expected": [
+    "https://example.com/license.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_link_header",
+   "name": "unquoted, relative",
+   "args": [
+    "</l.xml>; rel=license; type=application/rsl+xml",
+    "https://example.com/"
+   ],
+   "expected": [
+    "https://example.com/l.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_link_header",
+   "name": "licence link of another type ignored",
+   "args": [
+    "<https://example.com/cc>; rel=\"license\"",
+    "https://example.com/"
+   ],
+   "expected": []
+  },
+  {
+   "function": "rsl_from_link_header",
+   "name": "several links",
+   "args": [
+    "<https://example.com/x>; rel=\"next\", <https://example.com/rsl.xml>; rel=\"license\"; type=\"application/rsl+xml\"",
+    "https://example.com/"
+   ],
+   "expected": [
+    "https://example.com/rsl.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_html",
+   "name": "link element, relative href",
+   "args": [
+    "<html><head><link rel=\"license\" type=\"application/rsl+xml\" href=\"license.xml\"></head></html>",
+    "example.com",
+    "/docs/"
+   ],
+   "expected": [
+    "https://example.com/docs/license.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_html",
+   "name": "rel list and single quotes",
+   "args": [
+    "<link rel='alternate license' type='application/rsl+xml' href='https://example.com/l.xml'>",
+    "example.com",
+    "/"
+   ],
+   "expected": [
+    "https://example.com/l.xml"
+   ]
+  },
+  {
+   "function": "rsl_from_html",
+   "name": "plain licence link ignored",
+   "args": [
+    "<link rel='license' href='https://creativecommons.org/licenses/by/4.0/'>",
+    "example.com",
+    "/"
+   ],
+   "expected": []
+  },
+  {
+   "function": "tdmrep_facts",
+   "name": "site reserved with policy",
+   "args": [
+    200,
+    "[{\"location\": \"/\", \"tdm-reservation\": 1, \"tdm-policy\": \"https://example.com/policy.json\"}]"
+   ],
+   "expected": {
+    "s": 200,
+    "p": 1,
+    "rules": 1,
+    "site_reserved": true,
+    "any_reserved": true,
+    "policy_hosts": [
+     "example.com"
+    ]
+   }
+  },
+  {
+   "function": "tdmrep_facts",
+   "name": "part of the site reserved",
+   "args": [
+    200,
+    "[{\"location\": \"/images/*\", \"tdm-reservation\": 1}, {\"location\": \"/blog\", \"tdm-reservation\": 0}]"
+   ],
+   "expected": {
+    "s": 200,
+    "p": 1,
+    "rules": 2,
+    "site_reserved": null,
+    "any_reserved": true,
+    "policy_hosts": []
+   }
+  },
+  {
+   "function": "tdmrep_facts",
+   "name": "string reservation value",
+   "args": [
+    200,
+    "[{\"location\": \"/*\", \"tdm-reservation\": \"1\"}]"
+   ],
+   "expected": {
+    "s": 200,
+    "p": 1,
+    "rules": 1,
+    "site_reserved": true,
+    "any_reserved": true,
+    "policy_hosts": []
+   }
+  },
+  {
+   "function": "tdmrep_facts",
+   "name": "object instead of array: malformed",
+   "args": [
+    200,
+    "{\"location\": \"/\"}"
+   ],
+   "expected": {
+    "s": 200,
+    "p": 0,
+    "malformed": true
+   }
+  },
+  {
+   "function": "tdmrep_facts",
+   "name": "not JSON: malformed",
+   "args": [
+    200,
+    "not json"
+   ],
+   "expected": {
+    "s": 200,
+    "p": 0,
+    "malformed": true
+   }
+  },
+  {
+   "function": "tdmrep_facts",
+   "name": "empty array",
+   "args": [
+    200,
+    "[]"
+   ],
+   "expected": {
+    "s": 200,
+    "p": 1,
+    "rules": 0,
+    "site_reserved": null,
+    "any_reserved": false,
+    "policy_hosts": []
+   }
+  },
+  {
+   "function": "tdmrep_facts",
+   "name": "not found",
+   "args": [
+    404,
+    ""
+   ],
+   "expected": {
+    "s": 404,
+    "p": 0
+   }
+  },
+  {
+   "function": "header_signals",
+   "name": "Content-Usage and TDM headers, mixed-case names",
+   "args": [
+    {
+     "Content-Usage": "train-ai=n",
+     "TDM-Reservation": "1",
+     "TDM-Policy": "https://example.com/p.json"
+    },
+    "example.com"
+   ],
+   "expected": {
+    "follows": {
+     "aipref_vocab": "draft-ietf-aipref-vocab-08 (14 Sep 2026)",
+     "aipref_attach": "draft-ietf-aipref-attach-05 (19 Aug 2026)",
+     "rsl": "RSL 1.0 (RSL-SPEC-1.0, 10 Dec 2025)",
+     "tdmrep": "W3C TDM Reservation Protocol, Final Community Group Report",
+     "content_signals": "Content Signals Policy (contentsignals.org)"
+    },
+    "content_usage": {
+     "prefs": {
+      "train-ai": "n"
+     },
+     "ignored": []
+    },
+    "rsl_licences": [],
+    "tdm_reservation": "1",
+    "tdm_policy": "https://example.com/p.json"
+   }
+  },
+  {
+   "function": "header_signals",
+   "name": "RSL Link header",
+   "args": [
+    {
+     "link": "</license.xml>; rel=\"license\"; type=\"application/rsl+xml\""
+    },
+    "example.com"
+   ],
+   "expected": {
+    "follows": {
+     "aipref_vocab": "draft-ietf-aipref-vocab-08 (14 Sep 2026)",
+     "aipref_attach": "draft-ietf-aipref-attach-05 (19 Aug 2026)",
+     "rsl": "RSL 1.0 (RSL-SPEC-1.0, 10 Dec 2025)",
+     "tdmrep": "W3C TDM Reservation Protocol, Final Community Group Report",
+     "content_signals": "Content Signals Policy (contentsignals.org)"
+    },
+    "content_usage": null,
+    "rsl_licences": [
+     "https://example.com/license.xml"
+    ],
+    "tdm_reservation": null,
+    "tdm_policy": null
+   }
+  },
+  {
+   "function": "header_signals",
+   "name": "malformed Content-Usage",
+   "args": [
+    {
+     "content-usage": "TRAIN-AI=N"
+    },
+    "example.com"
+   ],
+   "expected": {
+    "follows": {
+     "aipref_vocab": "draft-ietf-aipref-vocab-08 (14 Sep 2026)",
+     "aipref_attach": "draft-ietf-aipref-attach-05 (19 Aug 2026)",
+     "rsl": "RSL 1.0 (RSL-SPEC-1.0, 10 Dec 2025)",
+     "tdmrep": "W3C TDM Reservation Protocol, Final Community Group Report",
+     "content_signals": "Content Signals Policy (contentsignals.org)"
+    },
+    "content_usage": null,
+    "rsl_licences": [],
+    "tdm_reservation": null,
+    "tdm_policy": null
+   }
+  },
+  {
+   "function": "header_signals",
+   "name": "nothing",
+   "args": [
+    {
+     "content-type": "text/html"
+    },
+    "example.com"
+   ],
+   "expected": {
+    "follows": {
+     "aipref_vocab": "draft-ietf-aipref-vocab-08 (14 Sep 2026)",
+     "aipref_attach": "draft-ietf-aipref-attach-05 (19 Aug 2026)",
+     "rsl": "RSL 1.0 (RSL-SPEC-1.0, 10 Dec 2025)",
+     "tdmrep": "W3C TDM Reservation Protocol, Final Community Group Report",
+     "content_signals": "Content Signals Policy (contentsignals.org)"
+    },
+    "content_usage": null,
+    "rsl_licences": [],
+    "tdm_reservation": null,
+    "tdm_policy": null
+   }
+  },
+  {
+   "function": "parse_usage",
+   "name": "recorded: pairs lower-cased",
+   "args": [
+    "Train-AI=N, search=y"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n",
+     "search": "y"
+    }
+   }
+  },
+  {
+   "function": "parse_usage",
+   "name": "recorded: leading path",
+   "args": [
+    "/blog/ train-ai=y"
+   ],
+   "expected": {
+    "path": "/blog/",
+    "prefs": {
+     "train-ai": "y"
+    }
+   }
+  },
+  {
+   "function": "parse_usage",
+   "name": "recorded: space separated, comment",
+   "args": [
+    "train-ai=n search=y # x"
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n",
+     "search": "y"
+    }
+   }
+  },
+  {
+   "function": "parse_usage",
+   "name": "recorded: nothing usable",
+   "args": [
+    "garbage"
+   ],
+   "expected": null
+  },
+  {
+   "function": "parse_usage",
+   "name": "recorded: quoted value",
+   "args": [
+    "train-ai=\"n\""
+   ],
+   "expected": {
+    "prefs": {
+     "train-ai": "n"
+    }
+   }
+  },
+  {
+   "function": "content_usage_from_robots",
+   "name": "recorded: lines, excerpt",
+   "args": [
+    "User-Agent: *\nContent-Usage: train-ai=n, search=y\nContent-Usage: /blog/ train-ai=y\nCONTENT-USAGE: ai-use=n # note\nContent-Usage: garbage\n"
+   ],
+   "expected": [
+    [
+     {
+      "prefs": {
+       "train-ai": "n",
+       "search": "y"
+      }
+     },
+     {
+      "path": "/blog/",
+      "prefs": {
+       "train-ai": "y"
+      }
+     },
+     {
+      "prefs": {
+       "ai-use": "n"
+      }
+     }
+    ],
+    "Content-Usage: train-ai=n, search=y | Content-Usage: /blog/ train-ai=y | CONTENT-USAGE: ai-use=n # note | Content-Usage: garbage"
+   ]
+  },
+  {
+   "function": "content_signals",
+   "name": "recorded: distinct value sets",
+   "args": [
+    "User-Agent: *\nContent-Signal: search=yes, ai-train=no\ncontent-signal: Search=Yes,AI-Train=No\nContent-Signal: unknown=1\n"
+   ],
+   "expected": [
+    {
+     "search": "yes",
+     "ai-train": "no"
+    }
+   ]
+  }
+ ]
+}

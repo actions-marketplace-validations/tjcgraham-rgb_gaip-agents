@@ -84,6 +84,7 @@ Outputs: `verdict` (READY, FIXES_NEEDED, UNREACHABLE or NOT_CHECKED), `receipt-i
 | `listing-kit.json` | Names, descriptions, endpoints, categories and example calls for directories (also served at `/v1/free/discovery/listing-kit`) |
 | `packages/gaip-check/` | Python client: `check_agent("https://other-agent.example")` |
 | `action.yml`, `packages/gaip-check-action/` | GitHub Action that checks an agent card in CI (`uses: tjcgraham-rgb/gaip-agents@v1`) |
+| `packages/aipref-signals/` | Dependency-free parser and test vectors for AI-preference signals (IETF AI Preferences `Content-Usage`, RSL licence links, W3C TDMRep, Content Signals) |
 | `assets/` | GAIP logo and the specialist icons (SVG) |
 
 ## What a result means
