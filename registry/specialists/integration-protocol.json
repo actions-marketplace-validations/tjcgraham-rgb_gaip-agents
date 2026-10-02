@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-integration-protocol",
   "title": "GAIP Integration & Protocol Agent",
   "description": "Developer checks and Agent Observatory: A2A, MCP and OpenAPI checks with a dated change log.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "websiteUrl": "https://www.gaipagents.com/agents/integration-protocol",
   "icons": [
     {

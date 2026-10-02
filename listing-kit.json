@@ -55,7 +55,7 @@
     {
       "name": "gaip_check",
       "title": "Check an AI agent, MCP server or API",
-      "use_when": "Use this when asked whether an AI agent, MCP server or API works, is valid or has changed. Pass its `url` (agent card, MCP endpoint or OpenAPI document). Returns a one-line verdict, the fixes, dated history when GAIP observes it, and a receipt.",
+      "use_when": "Use this when asked whether an AI agent, MCP server or API works, is valid or has changed. Pass its `url` (agent card, MCP endpoint or OpenAPI document). Returns a one-line verdict, the fixes, dated history when GAIP observes it, and a receipt. With `agent`: may your bot fetch it?",
       "example_arguments": {
         "url": "https://www.gaipagents.com/.well-known/agent-card.json"
       },
@@ -173,6 +173,7 @@
         "gaip_manifest_changes",
         "gaip_observatory_capture",
         "gaip_tools_changed_since",
+        "gaip_check_permission",
         "gaip_compare_supplier_snapshots",
         "gaip_diagnose_integration_failure",
         "gaip_supplier_reliability"
@@ -202,6 +203,7 @@
         "gaip_watch_events",
         "gaip_citation_witness",
         "gaip_check_sar_receipt",
+        "gaip_record_extract",
         "assurance_prepare",
         "assurance_complete",
         "assurance_verify",
@@ -296,7 +298,11 @@
     "changes_subscribe": "https://www.gaipagents.com/v1/free/changes/subscribe?url=",
     "changes_weekly": "https://www.gaipagents.com/changes",
     "changes_weekly_json": "https://www.gaipagents.com/v1/free/changes/weekly.json",
-    "ecosystem_snapshots": "https://www.gaipagents.com/v1/free/ecosystem/snapshots"
+    "ecosystem_snapshots": "https://www.gaipagents.com/v1/free/ecosystem/snapshots",
+    "permission_check": "https://www.gaipagents.com/v1/free/permission?url=",
+    "record_extract": "https://www.gaipagents.com/v1/free/record-extract?url=",
+    "test_range": "https://www.gaipagents.com/test-range",
+    "test_range_mcp": "https://www.gaipagents.com/test-range/mcp"
   },
   "registries": {
     "official_mcp_registry": {

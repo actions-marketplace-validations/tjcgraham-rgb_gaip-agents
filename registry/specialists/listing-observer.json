@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-listing-observer",
   "title": "GAIP Listing Observer",
   "description": "Listing Observer preview: a shop product page as clean data, with source checks and price history.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "websiteUrl": "https://www.gaipagents.com/agents/listing-observer",
   "icons": [
     {

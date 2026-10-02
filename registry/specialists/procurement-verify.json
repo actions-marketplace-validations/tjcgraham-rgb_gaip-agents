@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-procurement-verify",
   "title": "GAIP Procurement Evidence Agent",
   "description": "Now part of GAIP Witness: tests supplier claims and compares them with published metadata.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "websiteUrl": "https://www.gaipagents.com/agents/procurement-verify",
   "icons": [
     {
