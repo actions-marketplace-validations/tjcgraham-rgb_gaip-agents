@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-outcome-value",
   "title": "GAIP Outcome & Value Agent",
   "description": "Now part of GAIP Witness: records a task outcome and caller-supplied costs.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "websiteUrl": "https://www.gaipagents.com/agents/outcome-value",
   "icons": [
     {

@@ -3,7 +3,7 @@
   "name": "io.github.tjcgraham-rgb/gaip-buyer-assurance",
   "title": "GAIP Buyer Assurance Agent",
   "description": "Now part of GAIP Witness: records a buyer's request and checks what was delivered.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "websiteUrl": "https://www.gaipagents.com/agents/buyer-assurance",
   "icons": [
     {
