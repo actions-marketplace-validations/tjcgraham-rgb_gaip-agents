@@ -59,9 +59,18 @@ curl -s https://www.gaipagents.com/a2a/agentverse -H 'Content-Type: application/
 
 Add GAIP to an MCP client:
 
-```json
-{ "mcpServers": { "gaip": { "type": "http", "url": "https://www.gaipagents.com/mcp" } } }
-```
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.png)](https://cursor.com/en/install-mcp?name=gaip&config=eyJ1cmwiOiJodHRwczovL3d3dy5nYWlwYWdlbnRzLmNvbS9tY3AifQ%3D%3D)
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_GAIP-0098FF?logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=gaip&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fwww.gaipagents.com%2Fmcp%22%7D)
+
+| Client | How |
+|---|---|
+| Claude Code | `claude mcp add --transport http gaip https://www.gaipagents.com/mcp` |
+| Claude Desktop / claude.ai | Customize > Connectors > Add custom connector, URL `https://www.gaipagents.com/mcp`, no sign-in |
+| Cursor, VS Code | the buttons above, or `{ "mcpServers": { "gaip": { "url": "https://www.gaipagents.com/mcp" } } }` |
+| Gemini CLI | `gemini extensions install https://github.com/tjcgraham-rgb/gaip-agents` |
+| Windsurf | `~/.codeium/windsurf/mcp_config.json`: `{ "mcpServers": { "gaip": { "serverUrl": "https://www.gaipagents.com/mcp" } } }` |
+| Cline | `{ "mcpServers": { "gaip": { "type": "streamableHttp", "url": "https://www.gaipagents.com/mcp" } } }` (see `llms-install.md`) |
+| Anything else | https://www.gaipagents.com/docs/quickstart |
 
 ## Use it in CI (GitHub Action)
 
@@ -85,7 +94,9 @@ Outputs: `verdict` (READY, FIXES_NEEDED, UNREACHABLE or NOT_CHECKED), `receipt-i
 | `packages/gaip-check/` | Python client: `check_agent("https://other-agent.example")` |
 | `action.yml`, `packages/gaip-check-action/` | GitHub Action that checks an agent card in CI (`uses: tjcgraham-rgb/gaip-agents@v1`) |
 | `packages/aipref-signals/` | Dependency-free parser and test vectors for AI-preference signals (IETF AI Preferences `Content-Usage`, RSL licence links, W3C TDMRep, Content Signals) |
-| `assets/` | GAIP logo and the specialist icons (SVG) |
+| `assets/` | GAIP logo (SVG, and a 400×400 PNG) and the specialist icons (SVG) |
+| `gemini-extension.json`, `GEMINI.md` | Gemini CLI extension: installs GAIP's MCP server and tells the model when to use each tool |
+| `llms-install.md` | Install steps for AI assistants that set up MCP servers themselves (Cline) |
 
 ## What a result means
 
