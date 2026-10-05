@@ -1,0 +1,11 @@
+{
+  "name": "gaip-agents",
+  "version": "1.0.0",
+  "description": "GAIP: check, watch, diagnose and verify AI agents, MCP servers and APIs. Free, read-only, no key.",
+  "mcpServers": {
+    "gaip": {
+      "httpUrl": "https://www.gaipagents.com/mcp"
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}
