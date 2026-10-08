@@ -34,6 +34,14 @@ integration-repair (part of the developer checks); opportunity-broker and art-in
 Each specialist has its own MCP endpoint (`https://www.gaipagents.com/mcp/agents/<agent-id>`)
 and A2A card (`https://www.gaipagents.com/agents/<agent-id>/.well-known/agent-card.json`).
 
+## GAIP Watch: watch the agents your agent depends on
+
+Fail your build when an MCP server or agent your agent depends on changed its tools, schemas, sign-in or prices,
+with dated receipts. Free, no account: `uses: tjcgraham-rgb/gaip-agents/watch@main` (see [watch/](watch/)), or
+call `https://www.gaipagents.com/v1/free/watch/check` directly. Providers can show their own dated record with the
+badge `https://www.gaipagents.com/v1/free/watch/badge.svg?url=<your endpoint>`. Facts, never a verdict:
+https://www.gaipagents.com/watch
+
 ## Try it
 
 First call over MCP: check a public MCP server (runs as-is; then use your own agent's URL):
