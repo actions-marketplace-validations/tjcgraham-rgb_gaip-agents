@@ -1,0 +1,73 @@
+name: "GAIP Watch"
+description: "Fail your build when an MCP server or agent your agent depends on changed its tools, schema, sign-in or price, with dated receipts. Free, no account."
+author: "GAIP"
+branding:
+  icon: "eye"
+  color: "blue"
+inputs:
+  urls:
+    description: "The public https:// URLs your agent depends on (MCP endpoints or A2A agent cards): one per line, or comma-separated. Up to 25."
+    required: true
+  since:
+    description: "Look for changes recorded since this point: a number of days like 7d, or a date (YYYY-MM-DD or RFC 3339)."
+    required: false
+    default: "7d"
+  capture-unknown:
+    description: "When GAIP has no record of a URL yet, save a first dated record now so the next run has history ('true' or 'false'; up to 5 per run)."
+    required: false
+    default: "true"
+  fail-on-breaking:
+    description: "Fail the step when a breaking change class was recorded since the date ('true' or 'false')."
+    required: false
+    default: "true"
+  fail-on-unknown:
+    description: "Also fail when a URL has no GAIP record yet ('true' or 'false'). Default false: the first run saves the record."
+    required: false
+    default: "false"
+  continuity-handle:
+    description: "Optional: a GAIP continuity handle (JSON) from an earlier answer, kept as a repository secret, so your runs are linked. Without it the action keeps one in the Actions cache."
+    required: false
+    default: ""
+  gaip-endpoint:
+    description: "GAIP's dependency check route."
+    required: false
+    default: "https://www.gaipagents.com/v1/free/watch/check"
+  timeout-seconds:
+    description: "Request timeout in seconds."
+    required: false
+    default: "60"
+outputs:
+  breaking:
+    description: "'true' when a breaking change class was recorded for any target since the date."
+    value: ${{ steps.gaip-watch.outputs.breaking }}
+  changed:
+    description: "Number of targets with any change recorded since the date."
+    value: ${{ steps.gaip-watch.outputs.changed }}
+  unknown:
+    description: "Number of targets GAIP had no record of."
+    value: ${{ steps.gaip-watch.outputs.unknown }}
+  result-file:
+    description: "Path of the full JSON answer (per target: change classes, newest changes with receipt links)."
+    value: ${{ steps.gaip-watch.outputs.result-file }}
+runs:
+  using: "composite"
+  steps:
+    - id: handle-cache
+      if: ${{ inputs.continuity-handle == '' }}
+      uses: actions/cache@v4
+      with:
+        path: .gaip-watch/continuity.json
+        key: gaip-watch-continuity-${{ github.repository }}
+    - id: gaip-watch
+      shell: bash
+      env:
+        GAIP_WATCH_URLS: ${{ inputs.urls }}
+        GAIP_WATCH_SINCE: ${{ inputs.since }}
+        GAIP_WATCH_CAPTURE_UNKNOWN: ${{ inputs.capture-unknown }}
+        GAIP_WATCH_FAIL_ON_BREAKING: ${{ inputs.fail-on-breaking }}
+        GAIP_WATCH_FAIL_ON_UNKNOWN: ${{ inputs.fail-on-unknown }}
+        GAIP_WATCH_CONTINUITY: ${{ inputs.continuity-handle }}
+        GAIP_WATCH_CONTINUITY_FILE: .gaip-watch/continuity.json
+        GAIP_WATCH_ENDPOINT: ${{ inputs.gaip-endpoint }}
+        GAIP_WATCH_TIMEOUT_SECONDS: ${{ inputs.timeout-seconds }}
+      run: python3 "${{ github.action_path }}/watch.py"
