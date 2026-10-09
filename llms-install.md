@@ -1,5 +1,7 @@
 # Installing GAIP (for AI assistants such as Cline)
 
+GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment. What it answers, by who asks: https://www.gaipagents.com/v1/free/map.
+
 GAIP is a remote MCP server: nothing to download, build or run, and no API key.
 
 1. Add this server to the MCP settings file (`cline_mcp_settings.json` in Cline):

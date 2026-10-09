@@ -3,6 +3,8 @@
 Fail your build when an MCP server or agent your agent depends on changed its tools, input schemas,
 authentication or prices since you last looked, with dated receipts for each change.
 
+About GAIP: GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment. What it answers, by who asks: https://www.gaipagents.com/v1/free/map.
+
 GAIP reads public agents and MCP servers about daily and keeps a hash-chained record of what each one
 published. This action asks that record one question from your own pipeline: has anything my agent depends on
 changed since the last run, and is it the kind of change I have to act on? Free, no account, no API key, no
@@ -51,6 +53,8 @@ Pin to a commit SHA instead of `@main` for reproducible builds.
 | Output | Meaning |
 |---|---|
 | `breaking` | `true` when a breaking change class was recorded for any target |
+| `ingredients-changed` | Number of targets whose declared provider, version, model, operator or AI self-disclosure changed since the date (`declared_ingredients_changed`, informational) |
+| `hosting-changed` | Number of targets whose endpoint answered from another network or certificate issuer since the date (`hosting_changed`, informational; never the address) |
 | `changed` | Targets with any change recorded since the date |
 | `unknown` | Targets GAIP had no record of |
 | `result-file` | Path of the full JSON answer (`.gaip-watch/result.json`) |
@@ -58,9 +62,10 @@ Pin to a commit SHA instead of `@main` for reproducible builds.
 ### What counts as breaking
 
 A change class a dependent client usually has to act on: `tool_removed`, `schema_changed`, `auth_changed`,
-`pricing_changed`, `tool_changed_beyond_stored`. Recorded but not flagged: `tool_added`, `description_changed`,
-`annotations_changed`, `version_changed`. The labels come from GAIP's capability record and describe what the
-server published, not the server.
+`pricing_changed`, `tool_changed_beyond_stored`, `key_changed` (a signing key the host publishes was added,
+removed or swapped, from GAIP's weekly key record). Recorded but not flagged: `tool_added`, `description_changed`,
+`annotations_changed`, `version_changed`. The labels come from GAIP's capability and key records and describe what
+the server published, not the server.
 
 ### What GAIP does and does not do
 

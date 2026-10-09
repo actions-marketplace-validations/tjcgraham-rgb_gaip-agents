@@ -46,6 +46,12 @@ outputs:
   unknown:
     description: "Number of targets GAIP had no record of."
     value: ${{ steps.gaip-watch.outputs.unknown }}
+  ingredients-changed:
+    description: "Number of targets whose declared provider, version, model, operator or AI self-disclosure changed since the date (change class declared_ingredients_changed; informational, never fails the step)."
+    value: ${{ steps.gaip-watch.outputs.ingredients-changed }}
+  hosting-changed:
+    description: "Number of targets whose endpoint answered from another network or with another certificate issuer since the date (change class hosting_changed; informational, never fails the step)."
+    value: ${{ steps.gaip-watch.outputs.hosting-changed }}
   result-file:
     description: "Path of the full JSON answer (per target: change classes, newest changes with receipt links)."
     value: ${{ steps.gaip-watch.outputs.result-file }}

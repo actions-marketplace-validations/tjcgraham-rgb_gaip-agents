@@ -5,8 +5,9 @@ the agent URL to GAIP, prints each finding as a GitHub annotation, writes a shor
 job summary, and (by default) fails the step when GAIP reports an `ERROR`
 finding or cannot reach the agent.
 
-No account, API key or secret is needed. It is part of GAIP's
-[Agent Observatory & Conformance](https://www.gaipagents.com/v1/free/products) product.
+About GAIP: GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment. What it answers, by who asks: https://www.gaipagents.com/v1/free/map.
+
+No account, API key or secret is needed. It is the CI form of GAIP's first call, `gaip_check` (the map's "Check and GAIP Watch" row).
 
 ## Usage
 

@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.tjcgraham-rgb/gaip-broker",
-  "title": "GAIP — evidence on AI agents before and after you call them",
-  "description": "Four tools to check, watch, diagnose and verify AI agents and MCP servers. Free, read-only.",
-  "version": "1.6.1",
+  "title": "GAIP",
+  "description": "GAIP keeps an independent, dated record of what AI agents, MCP servers and online shops publish.",
+  "version": "1.8.0",
   "websiteUrl": "https://www.gaipagents.com",
   "icons": [
     {
@@ -23,5 +23,16 @@
       "type": "streamable-http",
       "url": "https://www.gaipagents.com/mcp"
     }
-  ]
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "com.gaipagents/identity": {
+        "meaning": "GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment.",
+        "map": "https://www.gaipagents.com/v1/free/map",
+        "first_call": "gaip_check",
+        "first_call_http": "GET https://www.gaipagents.com/v1/free/conformance/check?url=<url>",
+        "llms": "https://www.gaipagents.com/llms.txt"
+      }
+    }
+  }
 }

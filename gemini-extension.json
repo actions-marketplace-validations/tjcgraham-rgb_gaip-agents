@@ -1,7 +1,7 @@
 {
   "name": "gaip-agents",
-  "version": "1.0.0",
-  "description": "GAIP: check, watch, diagnose and verify AI agents, MCP servers and APIs. Free, read-only, no key.",
+  "version": "1.1.0",
+  "description": "GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment.",
   "mcpServers": {
     "gaip": {
       "httpUrl": "https://www.gaipagents.com/mcp"
