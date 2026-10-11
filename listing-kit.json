@@ -7,19 +7,21 @@
     "url": "https://www.gaipagents.com/erc8004/images/gaip.svg",
     "mimeType": "image/svg+xml"
   },
-  "one_liner": "Free, read-only evidence on AI agents and MCP servers: conformance, change, delivery, receipts.",
-  "lead": "Check any AI agent, MCP server or API by URL: does it work, is it valid, has it changed? Free, no key.",
+  "one_liner": "GAIP keeps an independent, dated record of what AI agents, MCP servers and online shops publish.",
+  "lead": "GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment.",
   "lead_then": "A call failed? Paste the error into gaip_diagnose for the cause, retry timing and the exact fix.",
   "first_call": {
     "tool": "gaip_check",
     "arguments": {
       "url": "https://mcp.deepwiki.com/mcp"
     },
-    "mcp": "https://www.gaipagents.com/mcp"
+    "mcp": "https://www.gaipagents.com/mcp",
+    "http": "GET https://www.gaipagents.com/v1/free/conformance/check?url=<url>"
   },
+  "map": "https://www.gaipagents.com/v1/free/map",
   "quickstart": "https://www.gaipagents.com/docs/quickstart",
-  "short_description": "gaip_check tests whether an AI agent, MCP server or API works, is valid or has changed; paste a failing agent, MCP or API error into gaip_diagnose for the cause, retry timing and the exact fix. GAIP also watches agents for change, witnesses what a delegated call returned and keeps verifiable receipts. Free, read-only, no account.",
-  "long_description": "GAIP gives builders and their agents read-only evidence about other agents before and after a delegated call. It has three public faces. The front door for developers is four tools on /mcp: gaip_check (does an agent, MCP server or API work, is it valid, has it changed), gaip_diagnose (why a call failed and the fix), gaip_watch and gaip_verify; behind it, the Agent Observatory keeps a hash-chained log of what agents and MCP servers published, and the integration-protocol agent checks A2A, MCP and OpenAPI declarations and watches suppliers for change. Witness records agreed terms, witnesses what was delivered, tests supplier claims, checks that cited pages contain the quoted text, and keeps verifiable receipts, dispute bundles, evidence packs and outcome records. The Listing Observer (preview) reads a shop product page into one clean product record for AI shopping agents, says whether the page and the shop platform's data agree, and keeps a dated price and stock history. Every result states what was observed and when; it is not a certification, endorsement, ranking or universal score, and not legal, financial or insurance advice. Calls are free and need no account or key; public or non-personal data only.",
+  "short_description": "GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment.",
+  "long_description": "GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment. Start with gaip_check: give it the URL of an AI agent, MCP server or API and it says whether it works, whether its declaration is valid and what changed, with a receipt. A call failed? gaip_diagnose gives the cause and the fix. Everything else GAIP answers, grouped by who asks, is on the map: https://www.gaipagents.com/v1/free/map. Every completed answer carries a continuity handle; send it back and the answer is bound to your own history with GAIP. Every answer states what was observed and when; it is not a certification, endorsement, ranking or universal score, and not legal, financial or insurance advice. Calls are free and need no account or key; public or non-personal data only.",
   "categories": [
     "developer-tools",
     "agent-infrastructure",
@@ -55,7 +57,7 @@
     {
       "name": "gaip_check",
       "title": "Check an AI agent, MCP server or API",
-      "use_when": "Use this when asked whether an AI agent, MCP server or API works, is valid or has changed. Pass its `url` (agent card, MCP endpoint or OpenAPI document). Returns a one-line verdict, the fixes, dated history when GAIP observes it, and a receipt. With `agent`: may your bot fetch it?",
+      "use_when": "Use this when asked whether an AI agent, MCP server or API works or has changed, e.g. before adding or paying it. Pass its `url`. Returns a verdict, fixes, dated history when observed, and a receipt. With `agent` (e.g. GPTBot): may your bot fetch it (robots.txt, AI-crawler rules)?",
       "example_arguments": {
         "url": "https://www.gaipagents.com/.well-known/agent-card.json"
       },
@@ -69,7 +71,7 @@
     {
       "name": "gaip_watch",
       "title": "Watch an agent or MCP server for changes",
-      "use_when": "Use this when asked to keep an eye on an agent or MCP server, or to be alerted when it changes. Pass its `url` for no-account feed links and its latest dated changes; add `webhook_url` to register a free watch (checked every 24 h, signed webhook on change).",
+      "use_when": "Use this when asked to keep an eye on an agent or MCP server, or to be alerted when it changes. Pass its `url`: returns feed links and its latest dated changes; add `webhook_url` for a free watch (checked every 24 h, signed webhook on change).",
       "example_arguments": {
         "url": "https://www.gaipagents.com/mcp"
       },
@@ -83,22 +85,22 @@
     {
       "name": "gaip_diagnose",
       "title": "Why did my agent or API call fail?",
-      "use_when": "Use this when an agent, MCP or API call failed. Paste the `error` text and/or `http_status`; add the service `url` if known. Returns the cause, the exact fix (e.g. the missing argument), retry_after_seconds and a receipt.",
+      "use_when": "Use this when an agent, MCP or API call failed. Paste the `error` text and/or `http_status`; add the service `url` if known. Returns the cause, the exact fix (e.g. the missing argument) and retry_after_seconds; `keep_receipt: true` adds a dated receipt.",
       "example_arguments": {
         "error": "HTTP 429 Too Many Requests; Retry-After: 20",
         "http_status": 429
       },
       "annotations": {
-        "readOnlyHint": false,
+        "readOnlyHint": true,
         "destructiveHint": false,
-        "idempotentHint": false,
+        "idempotentHint": true,
         "openWorldHint": false
       }
     },
     {
       "name": "gaip_verify",
       "title": "Verify a delivery or citations",
-      "use_when": "Use this when asked whether a service delivered what was promised or whether cited pages contain the quoted text. Pass `citations`, or a service `url` (+ `checks`, the `result` you got); `claims` are compared with `observations` you supply.",
+      "use_when": "Use this when asked whether a service delivered what was promised or whether cited pages contain the quoted text. Pass `citations`, or a service `url` (+ `checks`, the `result` you got), or `claims` with `observations`. Returns a result per item and a receipt.",
       "example_arguments": {
         "citations": [
           {
@@ -113,41 +115,228 @@
         "idempotentHint": false,
         "openWorldHint": true
       }
+    },
+    {
+      "name": "second_look_check",
+      "title": "Second Look: check before you buy",
+      "use_when": "Use this when a shopper is about to buy something an AI suggested, or asks if a price or stock claim is right. Pass the product page `url` and the `claim`. Returns what the shop shows now, whether it matches, and a signed, dated receipt. Second Look by GAIP.",
+      "example_arguments": {
+        "url": "https://www.gaipagents.com/test-range/shop/products/demo-mug",
+        "claim": "24 GBP, in stock"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      }
     }
   ],
   "products": [
     {
-      "id": "developer-checks",
-      "name": "Developer checks & Observatory",
-      "kind": "PRODUCT",
-      "one_line": "The front door for developers: on /mcp, gaip_check tests whether an agent, MCP server or API works, is valid or has changed, gaip_diagnose explains a failed call and the fix, gaip_watch follows it for changes and gaip_verify checks what came back. Behind it, the Agent Observatory keeps a dated record of what agents published; facts at a stated time, never a ranking or score.",
-      "lead_agent": "integration-protocol",
-      "agents": [
-        "integration-protocol"
+      "id": "check",
+      "name": "Check and GAIP Watch",
+      "question": "Does this agent, server or API work, and has it changed?",
+      "who": "any",
+      "one_line": "A one-line verdict, the fixes, dated history where GAIP observes it, and a receipt; GAIP Watch follows it for changes.",
+      "tools": [
+        "gaip_check",
+        "gaip_watch"
       ],
-      "url": "https://www.gaipagents.com/v1/free/products#developer-checks"
+      "routes": [
+        "GET /v1/free/conformance/check?url=",
+        "GET /v1/free/changes/feed.json?url="
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
     },
     {
-      "id": "witness",
-      "name": "Witness: delivery & evidence",
-      "kind": "PRODUCT",
-      "one_line": "Agreed terms, delivery, receipts, disputes and evidence: record the checks a buyer expects, witness what came back, test supplier claims, and keep verifiable receipts, evidence packs and outcome records; no trust score and no ROI claim.",
-      "lead_agent": "witness",
-      "agents": [
-        "witness"
+      "id": "diagnose",
+      "name": "Diagnose",
+      "question": "A call failed; what went wrong?",
+      "who": "any",
+      "one_line": "The cause, when to retry and the exact fix, from the error text and HTTP status you paste.",
+      "tools": [
+        "gaip_diagnose"
       ],
-      "url": "https://www.gaipagents.com/v1/free/products#witness"
+      "routes": [
+        "POST /v1/free/commercial/repair"
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
     },
     {
-      "id": "shop-listing-data",
-      "name": "Shop listing data (preview)",
-      "kind": "PRODUCT",
-      "one_line": "Whether a shop's product data reads the same to AI shopping agents as on the page: price, stock, SKU and name across the page's public sources, with a dated history. The engine of GAIP's Shopify app (coming soon). Read-only; never cart or checkout.",
-      "lead_agent": "listing-observer",
-      "agents": [
-        "listing-observer"
+      "id": "delivery",
+      "name": "Witness",
+      "question": "Was this delivery or quotation what was promised?",
+      "who": "company_agent",
+      "one_line": "Witness tests a service's response against the terms you registered, or cited pages against the quoted text, with a receipt for each.",
+      "tools": [
+        "gaip_verify",
+        "witness_register_terms",
+        "witness_delivery"
       ],
-      "url": "https://www.gaipagents.com/v1/free/products#shop-listing-data"
+      "routes": [
+        "POST /v1/free/witness/terms",
+        "POST /v1/free/witness/deliver"
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "record-by-date",
+      "name": "The record by date",
+      "question": "What did a site allow, publish, key or charge on a date?",
+      "who": "company_agent",
+      "one_line": "Its robots.txt permissions for a named AI agent, its signing keys and its x402 prices in the week of that date; since when GAIP has recorded an endpoint or a registry name, and which earlier names look like it.",
+      "tools": [
+        "gaip_record_permissions",
+        "gaip_record_prices",
+        "gaip_record_keys",
+        "gaip_record_names",
+        "gaip_record_tenure",
+        "gaip_record_extract",
+        "gaip_check_permission"
+      ],
+      "routes": [
+        "GET /v1/free/record/permissions?host=&agent=&on=",
+        "GET /v1/free/record/prices?host=&on=",
+        "GET /v1/free/record/keys?host=&on=",
+        "GET /v1/free/record/names?name=",
+        "GET /v1/free/record/tenure?url=",
+        "GET /v1/free/record-extract?url=",
+        "GET /v1/free/permission?url=&agent="
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "notices",
+      "name": "Notices",
+      "question": "Has anyone withdrawn it or warned about it?",
+      "who": "company_agent",
+      "one_line": "Registry status flips, an operator's own withdrawal, package advisories, each with the issuer named and the operator's reply.",
+      "tools": [
+        "gaip_notices",
+        "gaip_dependency_check"
+      ],
+      "routes": [
+        "GET /v1/free/notices?urls=",
+        "GET /v1/free/watch/check?urls="
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "preferences",
+      "name": "Preferences",
+      "question": "May I contact this person's agent?",
+      "who": "company_agent",
+      "one_line": "Before an agent approaches a person it checks their published rules and keeps a receipt.",
+      "tools": [
+        "gaip_check_preferences"
+      ],
+      "routes": [
+        "GET /v1/free/preferences/check?subject=&approach=&channel="
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "deals",
+      "name": "Deals",
+      "question": "Was this business deal kept?",
+      "who": "company_agent",
+      "one_line": "Both trading agents name GAIP as witness; either party asks for the signed finding on the agreed rule, over GAIP's own delivery records. Evidence, never a sum of money.",
+      "tools": [
+        "witness_accept_terms",
+        "witness_finding"
+      ],
+      "routes": [
+        "POST /v1/free/witness/accept",
+        "POST /v1/free/witness/finding"
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "screen",
+      "name": "The caller screen",
+      "question": "Who is calling me, and should I pick up?",
+      "who": "person_agent",
+      "one_line": "When an agent approaches yours, the caller screen shows how long it has been on record and whether it checked first. Facts, never a score; GAIP cannot block a call.",
+      "tools": [
+        "gaip_screen_caller"
+      ],
+      "routes": [
+        "GET /v1/free/preferences/screen?caller=&approach="
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "second-look",
+      "name": "Second Look",
+      "question": "Does the shop's own page show the price and stock an AI quoted?",
+      "who": "person_agent",
+      "one_line": "Second Look reads the shop's own page now and says whether it matches, with a signed, dated receipt. No affiliate links.",
+      "tools": [
+        "second_look_check"
+      ],
+      "routes": [
+        "POST /v1/free/second-look"
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "mandates",
+      "name": "Mandates",
+      "question": "Was this agent authorised to act for them?",
+      "who": "person_agent",
+      "one_line": "Whether a person's published mandate for an agent was in force, withdrawn or expired as GAIP indexed it, with a receipt.",
+      "tools": [
+        "gaip_check_mandate"
+      ],
+      "routes": [
+        "GET /v1/free/mandates/check?principal=&agent=&scope="
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "signoffs",
+      "name": "Sign-offs",
+      "question": "Who signed off on this decision, and when?",
+      "who": "person_agent",
+      "one_line": "A role records its decision on an agent's proposal, chained and signed; GAIP never takes the decision.",
+      "tools": [
+        "witness_signoff"
+      ],
+      "routes": [
+        "POST /v1/free/witness/signoff"
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "ingredients-residence",
+      "name": "Ingredients and Residence",
+      "question": "What is this agent made of, and where does it live?",
+      "who": "any",
+      "one_line": "As recorded on a date: what its documents say it runs on, and where it answered from (network and country, never the address).",
+      "tools": [
+        "gaip_record_ingredients",
+        "gaip_record_residence"
+      ],
+      "routes": [
+        "GET /v1/free/record/ingredients?url=&on=",
+        "GET /v1/free/record/residence?url=&on="
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
+    },
+    {
+      "id": "statements",
+      "name": "Statements",
+      "question": "What did my agents do this month?",
+      "who": "any",
+      "one_line": "A signed monthly record of what GAIP recorded for the agents bound to your continuity handle, with every line's receipt; served only to that handle.",
+      "tools": [
+        "gaip_statement"
+      ],
+      "routes": [
+        "GET /v1/statements/YYYY-MM (X-GAIP-Continuity header)"
+      ],
+      "url": "https://www.gaipagents.com/v1/free/map"
     }
   ],
   "agents": [
@@ -204,6 +393,9 @@
         "gaip_citation_witness",
         "gaip_check_sar_receipt",
         "gaip_record_extract",
+        "witness_accept_terms",
+        "witness_finding",
+        "witness_signoff",
         "assurance_prepare",
         "assurance_complete",
         "assurance_verify",
@@ -437,13 +629,64 @@
         "how": "Settings > Security and login > turn on Developer mode; then add a plugin with the plus button and, under Connection, enter the MCP URL (including /mcp).",
         "url": "https://www.gaipagents.com/mcp"
       },
+      "gemini_cli": {
+        "file": "~/.gemini/settings.json",
+        "json": {
+          "mcpServers": {
+            "gaip": {
+              "httpUrl": "https://www.gaipagents.com/mcp"
+            }
+          }
+        }
+      },
+      "windsurf": {
+        "file": "~/.codeium/windsurf/mcp_config.json",
+        "json": {
+          "mcpServers": {
+            "gaip": {
+              "serverUrl": "https://www.gaipagents.com/mcp"
+            }
+          }
+        }
+      },
+      "cline": {
+        "file": "cline_mcp_settings.json",
+        "json": {
+          "mcpServers": {
+            "gaip": {
+              "type": "streamableHttp",
+              "url": "https://www.gaipagents.com/mcp"
+            }
+          }
+        }
+      },
       "openai_agents_sdk": {
-        "python": "import asyncio\nfrom agents import Agent, Runner\nfrom agents.mcp import MCPServerStreamableHttp\n\n\nasync def main():\n    async with MCPServerStreamableHttp(name='gaip', params={\"url\": 'https://www.gaipagents.com/mcp'}) as server:\n        agent = Agent(name=\"Assistant\", instructions=\"Use the GAIP tools to check agents.\",\n                      mcp_servers=[server])\n        result = await Runner.run(agent, \"Check https://mcp.deepwiki.com/mcp with gaip_check.\")\n        print(result.final_output)\n\n\nasyncio.run(main())\n"
+        "python": "import asyncio\nfrom agents import Agent, Runner\nfrom agents.mcp import MCPServerStreamableHttp\n\n\nasync def main():\n    async with MCPServerStreamableHttp(name='gaip', params={\"url\": 'https://www.gaipagents.com/mcp'}) as server:\n        agent = Agent(name=\"Assistant\", instructions=\"Use the GAIP tools to check agents.\",\n                      mcp_servers=[server])\n        result = await Runner.run(agent, \"Check https://mcp.deepwiki.com/mcp with gaip_check.\")\n        print(result.final_output)\n\n\nasyncio.run(main())\n",
+        "hosted_python": "from agents import Agent, HostedMCPTool, Runner\n\nagent = Agent(name=\"Assistant\", tools=[HostedMCPTool(tool_config={\n    \"type\": \"mcp\", \"server_label\": 'gaip', \"server_url\": 'https://www.gaipagents.com/mcp', \"require_approval\": \"never\"})])\nprint(Runner.run_sync(agent, \"Check https://mcp.deepwiki.com/mcp with gaip_check.\").final_output)\n"
       },
       "langchain": {
         "install": "pip install langchain-mcp-adapters",
         "python": "import asyncio\nfrom langchain_mcp_adapters.client import MultiServerMCPClient\n\n\nasync def main():\n    client = MultiServerMCPClient({'gaip': {\"transport\": \"http\", \"url\": 'https://www.gaipagents.com/mcp'}})\n    tools = await client.get_tools()\n    print([tool.name for tool in tools])\n\n\nasyncio.run(main())\n"
+      },
+      "langchain_gaip": {
+        "install": "pip install langchain-gaip",
+        "python": "from langchain_gaip import get_tools\n\ntools = get_tools()   # pass them to any LangChain or LangGraph agent\nprint(tools[0].invoke({\"url\": 'https://mcp.deepwiki.com/mcp'}))\n"
+      },
+      "vercel_ai_sdk": {
+        "install": "npm install @ai-sdk/mcp",
+        "typescript": "import { createMCPClient } from '@ai-sdk/mcp';\n\nconst gaip = await createMCPClient({ transport: { type: 'http', url: 'https://www.gaipagents.com/mcp' } });\nconst tools = await gaip.tools();   // pass to generateText or streamText; then await gaip.close()\n"
+      },
+      "crewai": {
+        "install": "pip install crewai mcp",
+        "python": "from crewai import Agent\n\nagent = Agent(role=\"Integration checker\", goal=\"Check agents and MCP servers before relying on them\",\n              backstory=\"Uses GAIP's dated record\",\n              mcps=['https://www.gaipagents.com/mcp'])\n"
       }
+    },
+    "install_links": {
+      "cursor": "cursor://anysphere.cursor-deeplink/mcp/install?name=gaip&config=eyJ1cmwiOiJodHRwczovL3d3dy5nYWlwYWdlbnRzLmNvbS9tY3AifQ==",
+      "vscode": "vscode:mcp/install?%7B%22name%22%3A%22gaip%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fwww.gaipagents.com%2Fmcp%22%7D",
+      "vscode_insiders": "vscode-insiders:mcp/install?%7B%22name%22%3A%22gaip%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fwww.gaipagents.com%2Fmcp%22%7D",
+      "cursor_web": "https://cursor.com/en/install-mcp?name=gaip&config=eyJ1cmwiOiJodHRwczovL3d3dy5nYWlwYWdlbnRzLmNvbS9tY3AifQ%3D%3D",
+      "vscode_web": "https://insiders.vscode.dev/redirect/mcp/install?name=gaip&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fwww.gaipagents.com%2Fmcp%22%7D"
     },
     "curl": {
       "mcp_tools_list": "curl -s https://www.gaipagents.com/mcp -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{}}'",

@@ -4,6 +4,8 @@ A small parser for the machine-readable signals a website can publish to say wha
 its content, with a table of conformance test vectors. One Python file, Python 3.9 or later, no
 dependencies, no network access. MIT licence.
 
+About GAIP: GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment. What it answers, by who asks: https://www.gaipagents.com/v1/free/map. GAIP uses this parser to record what each site's signals said on a date (`gaip_record_permissions`).
+
 | Signal | Where | Version followed |
 | --- | --- | --- |
 | IETF AI preferences | `Content-Usage` header and robots.txt rule | draft-ietf-aipref-vocab-08 (14 Sep 2026), draft-ietf-aipref-attach-05 (19 Aug 2026) |

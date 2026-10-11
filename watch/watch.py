@@ -146,6 +146,16 @@ def report(result: dict[str, Any], out: Callable[[str], None] = print) -> None:
     out(str(result.get("meaning") or ""))
 
 
+def _class_count(result: dict[str, Any], change_class: str) -> int:
+    """Targets whose change classes since the date include ``change_class`` (counted from the rows, so an older GAIP
+    answer without the summary field still gives a number)."""
+    summary = result.get("summary") or {}
+    key = {"declared_ingredients_changed": "ingredients_changed", "hosting_changed": "hosting_changed"}.get(change_class)
+    if key and isinstance(summary.get(key), int):
+        return summary[key]
+    return sum(1 for row in result.get("targets") or [] if change_class in (row.get("change_classes") or []))
+
+
 def _write_outputs(result: dict[str, Any], env: dict[str, str], result_file: str) -> None:
     summary = result.get("summary") or {}
     path = env.get("GITHUB_OUTPUT")
@@ -154,6 +164,9 @@ def _write_outputs(result: dict[str, Any], env: dict[str, str], result_file: str
             fh.write(f"breaking={'true' if result.get('breaking') else 'false'}\n")
             fh.write(f"changed={summary.get('changed', 0)}\n")
             fh.write(f"unknown={summary.get('unknown', 0)}\n")
+            # Round two (decision #52, 9 Oct 2026): the two informational classes as their own outputs, beside breaking
+            fh.write(f"ingredients-changed={_class_count(result, 'declared_ingredients_changed')}\n")
+            fh.write(f"hosting-changed={_class_count(result, 'hosting_changed')}\n")
             fh.write(f"result-file={result_file}\n")
     summary_path = env.get("GITHUB_STEP_SUMMARY")
     if summary_path:

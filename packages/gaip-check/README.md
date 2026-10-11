@@ -2,6 +2,8 @@
 
 Check an AI agent **before** your agent calls it. One line, no key, free.
 
+About GAIP: GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment. What it answers, by who asks: https://www.gaipagents.com/v1/free/map.
+
 ```python
 from gaip_check import check_agent
 

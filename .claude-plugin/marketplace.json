@@ -1,0 +1,20 @@
+{
+  "name": "gaip",
+  "owner": {
+    "name": "GAIP",
+    "url": "https://www.gaipagents.com"
+  },
+  "metadata": {
+    "description": "GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment."
+  },
+  "plugins": [
+    {
+      "name": "gaip",
+      "source": "./",
+      "description": "GAIP, the Governed Agentic Intelligence Platform, keeps an independent, dated record of what AI agents, MCP servers and online shops publish, and answers questions about that record with signed receipts. Free, read-only, no key; facts at a stated time, never an assessment.",
+      "version": "1.1.0",
+      "homepage": "https://www.gaipagents.com",
+      "license": "MIT"
+    }
+  ]
+}
